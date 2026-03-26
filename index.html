@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<!-- KEEPING YOUR CLARITY SCRIPT -->
+<!-- KEEP YOUR CLARITY SCRIPT -->
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -16,154 +16,124 @@
 
 <style>
 
-/* 🌌 BACKGROUND WITH ANIMATION */
+/* 🌌 BACKGROUND */
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     color:white;
-    background: linear-gradient(-45deg,#001f3f,#003366,#001a2e,#000);
-    background-size: 400% 400%;
-    animation: bgMove 10s infinite alternate;
+    background: linear-gradient(#001a2e,#000);
     overflow-x:hidden;
 }
 
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    100%{background-position:100% 50%;}
-}
-
-/* 💡 FLOATING GLOW ORBS */
-body::before, body::after{
-    content:"";
+/* 🫧 FLOATING BUBBLES */
+.bubble{
     position:absolute;
-    width:400px;
-    height:400px;
+    bottom:-100px;
+    width:40px;
+    height:40px;
+    background:radial-gradient(circle,#00eaff,#00ffaa);
     border-radius:50%;
-    filter:blur(100px);
-    opacity:0.6;
+    opacity:0.4;
+    animation: rise 10s infinite ease-in;
 }
 
-body::before{
-    background:#00eaff;
-    top:10%;
-    left:10%;
-}
-
-body::after{
-    background:#00ffaa;
-    bottom:10%;
-    right:10%;
+@keyframes rise{
+    0%{transform:translateY(0) scale(1);}
+    100%{transform:translateY(-120vh) scale(1.5);}
 }
 
 /* HEADER */
 header{
-    padding:25px;
     background: linear-gradient(90deg,#00eaff,#00ffaa);
     color:black;
-    text-shadow:0 0 10px white;
-    box-shadow:0 0 30px #00eaff;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 0 25px #00eaff;
 }
 
 /* NAV */
 nav{
     background:rgba(0,0,0,0.7);
-    backdrop-filter: blur(15px);
-    padding:12px;
-    border-bottom:1px solid #00eaff;
+    padding:10px;
+    backdrop-filter:blur(10px);
 }
 
 nav a{
     color:#00eaff;
     margin:15px;
     text-decoration:none;
-    font-size:18px;
-    transition:0.3s;
 }
 
-nav a:hover{
-    color:#00ffaa;
-    text-shadow:0 0 15px #00ffaa;
-}
-
-/* SECTION GRID */
-.section-grid{
+/* HERO SECTION */
+.hero{
+    height:60vh;
     display:flex;
-    flex-wrap:wrap;
+    align-items:center;
     justify-content:center;
-    gap:20px;
-    padding:30px;
+    flex-direction:column;
+    background:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f') center/cover;
+    position:relative;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+}
+
+.hero h1{
+    position:relative;
+    font-size:50px;
+}
+
+/* SECTION */
+.section{
+    padding:20px;
+}
+
+/* HORIZONTAL SCROLL */
+.row{
+    display:flex;
+    overflow-x:auto;
+    gap:15px;
+    padding:10px;
 }
 
 /* CARD */
 .card{
-    background: rgba(255,255,255,0.05);
-    border:1px solid rgba(0,255,255,0.3);
-    backdrop-filter: blur(20px);
-    width:260px;
-    border-radius:15px;
+    min-width:200px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid #00eaff;
+    border-radius:10px;
     overflow:hidden;
-    transition:0.4s;
-    position:relative;
+    transition:0.3s;
 }
 
-/* SHINY OVERLAY */
-.card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
-    transition:0.5s;
-}
-
-.card:hover::before{
-    left:100%;
-}
-
-/* HOVER EFFECT */
-.card:hover{
-    transform:scale(1.07);
-    box-shadow:0 0 25px #00eaff,0 0 60px #00ffaa;
-}
-
-/* IMAGE */
 .card img{
     width:100%;
-    height:150px;
+    height:120px;
     object-fit:cover;
 }
 
-/* CONTENT */
-.card-content{
-    padding:15px;
+.card:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px #00eaff;
 }
 
 /* BUTTON */
 button{
-    background: linear-gradient(90deg,#00eaff,#00ffaa);
-    border:none;
-    padding:10px;
     width:100%;
-    color:black;
-    border-radius:20px;
+    padding:8px;
+    background:linear-gradient(#00eaff,#00ffaa);
+    border:none;
     cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 15px #00ffaa;
 }
 
 /* FOOTER */
 footer{
     background:#000;
-    padding:15px;
-    border-top:1px solid #00eaff;
-    color:#00eaff;
+    padding:20px;
     text-align:center;
 }
 
@@ -172,9 +142,20 @@ footer{
 
 <body>
 
+<!-- 🫧 BUBBLES -->
+<script>
+for(let i=0;i<20;i++){
+    let b=document.createElement("div");
+    b.className="bubble";
+    b.style.left=Math.random()*100+"%";
+    b.style.animationDuration=(5+Math.random()*10)+"s";
+    document.body.appendChild(b);
+}
+</script>
+
 <header>
-<h1>⚡ ENTERTAINMENT HUB ⚡</h1>
-<p>Neo • Glass • Futuristic Streaming</p>
+<h1>⚡ Entertainment Hub</h1>
+<p>Neo Futuristic Streaming</p>
 </header>
 
 <nav>
@@ -184,80 +165,86 @@ footer{
 <a href="#">Games</a>
 </nav>
 
-<!-- 🎬 MOVIES -->
-<h2 style="text-align:center;">🎬 Movies</h2>
-<div class="section-grid">
+<!-- HERO -->
+<div class="hero">
+<h1>Watch Anything Anytime</h1>
+<button onclick="alert('Start Watching')">Start Now</button>
+</div>
+
+<!-- MOVIES -->
+<div class="section">
+<h2>🔥 Trending Movies</h2>
+<div class="row">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4">
-<div class="card-content">
-<h3>Avengers</h3>
-<p>Superhero war saga</p>
-<button onclick="alert('Streaming...')">Watch</button>
-</div>
+<button>Watch</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f">
-<div class="card-content">
-<h3>Spider Man</h3>
-<p>Marvel adventure</p>
-<button onclick="alert('Streaming...')">Watch</button>
+<img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66">
+<button>Watch</button>
 </div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc">
+<button>Watch</button>
 </div>
 
 </div>
+</div>
 
-<!-- 🎵 MUSIC -->
-<h2 style="text-align:center;">🎵 Music</h2>
-<div class="section-grid">
+<!-- MUSIC -->
+<div class="section">
+<h2>🎵 Music</h2>
+<div class="row">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f">
-<div class="card-content">
-<h3>Pop Hits</h3>
-<p>Trending music</p>
-<button onclick="alert('Playing...')">Play</button>
-</div>
+<button>Play</button>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2">
-<div class="card-content">
-<h3>Relax</h3>
-<p>Calm vibes</p>
-<button onclick="alert('Playing...')">Play</button>
-</div>
+<button>Play</button>
 </div>
 
 </div>
+</div>
 
-<!-- 🎮 GAMES -->
-<h2 style="text-align:center;">🎮 Games</h2>
-<div class="section-grid">
+<!-- GAMES -->
+<div class="section">
+<h2>🎮 Games</h2>
+<div class="row">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
-<div class="card-content">
-<h3>Guess Game</h3>
-<p>Fun challenge</p>
-<button onclick="alert('Starting...')">Play</button>
-</div>
+<button>Play</button>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1">
-<div class="card-content">
-<h3>Puzzle</h3>
-<p>Brain test</p>
-<button onclick="alert('Starting...')">Play</button>
+<button>Play</button>
+</div>
+
 </div>
 </div>
 
+<!-- EXTRA LONG CONTENT -->
+<div class="section">
+<h2>⭐ Recommended</h2>
+<div class="row">
+
+<div class="card"><img src="https://picsum.photos/200/120?1"><button>Watch</button></div>
+<div class="card"><img src="https://picsum.photos/200/120?2"><button>Watch</button></div>
+<div class="card"><img src="https://picsum.photos/200/120?3"><button>Watch</button></div>
+<div class="card"><img src="https://picsum.photos/200/120?4"><button>Watch</button></div>
+
+</div>
 </div>
 
 <footer>
-<p>© 2026 Entertainment Hub | Ultra Neon Edition</p>
+<p>© 2026 Entertainment Hub</p>
 </footer>
 
 </body>
