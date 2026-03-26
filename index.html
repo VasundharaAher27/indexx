@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<!-- KEEP YOUR CLARITY SCRIPT -->
+<!-- KEEP YOUR CLARITY SCRIPT EXACTLY -->
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -16,62 +16,85 @@
 
 <style>
 
-/* 🌌 BACKGROUND */
+/* 🔥 RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-    margin:0;
     font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(180deg,#001a2e,#000);
     color:white;
-    background: linear-gradient(#001a2e,#000);
     overflow-x:hidden;
 }
 
-/* 🫧 FLOATING BUBBLES */
+/* 🫧 BUBBLE BACKGROUND (FIXED + BEHIND) */
+.bubble-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    overflow:hidden;
+}
+
 .bubble{
     position:absolute;
     bottom:-100px;
-    width:40px;
-    height:40px;
-    background:radial-gradient(circle,#00eaff,#00ffaa);
+    width:30px;
+    height:30px;
     border-radius:50%;
-    opacity:0.4;
-    animation: rise 10s infinite ease-in;
+    background:radial-gradient(circle,#00eaff,#00ffaa);
+    opacity:0.25;
+    animation:rise linear infinite;
 }
 
 @keyframes rise{
-    0%{transform:translateY(0) scale(1);}
-    100%{transform:translateY(-120vh) scale(1.5);}
+    from{transform:translateY(0);}
+    to{transform:translateY(-120vh);}
+}
+
+/* CONTENT ABOVE */
+.main{
+    position:relative;
+    z-index:2;
 }
 
 /* HEADER */
 header{
-    background: linear-gradient(90deg,#00eaff,#00ffaa);
+    background:linear-gradient(90deg,#00eaff,#00ffaa);
     color:black;
-    padding:20px;
+    padding:15px;
     text-align:center;
-    box-shadow:0 0 25px #00eaff;
+    box-shadow:0 0 20px #00eaff;
 }
 
 /* NAV */
 nav{
-    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    gap:30px;
     padding:10px;
+    background:rgba(0,0,0,0.7);
     backdrop-filter:blur(10px);
 }
 
 nav a{
     color:#00eaff;
-    margin:15px;
     text-decoration:none;
+    transition:0.3s;
+}
+nav a:hover{
+    color:#00ffaa;
+    text-shadow:0 0 10px #00ffaa;
 }
 
-/* HERO SECTION */
+/* 🎬 HERO */
 .hero{
-    height:60vh;
+    height:75vh;
+    background:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover;
     display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    background:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f') center/cover;
+    align-items:flex-end;
+    padding:40px;
     position:relative;
 }
 
@@ -79,12 +102,25 @@ nav a{
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,0.6);
+    background:linear-gradient(to top,#000 10%,transparent);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
 }
 
 .hero h1{
-    position:relative;
     font-size:50px;
+}
+
+.hero button{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    background:linear-gradient(#00eaff,#00ffaa);
+    border-radius:20px;
+    cursor:pointer;
 }
 
 /* SECTION */
@@ -92,17 +128,17 @@ nav a{
     padding:20px;
 }
 
-/* HORIZONTAL SCROLL */
+/* ROW */
 .row{
     display:flex;
-    overflow-x:auto;
     gap:15px;
-    padding:10px;
+    overflow-x:auto;
+    padding-top:10px;
 }
 
 /* CARD */
 .card{
-    min-width:200px;
+    min-width:180px;
     background:rgba(255,255,255,0.05);
     border:1px solid #00eaff;
     border-radius:10px;
@@ -121,20 +157,12 @@ nav a{
     box-shadow:0 0 20px #00eaff;
 }
 
-/* BUTTON */
-button{
-    width:100%;
-    padding:8px;
-    background:linear-gradient(#00eaff,#00ffaa);
-    border:none;
-    cursor:pointer;
-}
-
 /* FOOTER */
 footer{
-    background:#000;
-    padding:20px;
     text-align:center;
+    padding:20px;
+    background:#000;
+    margin-top:20px;
 }
 
 </style>
@@ -142,20 +170,13 @@ footer{
 
 <body>
 
-<!-- 🫧 BUBBLES -->
-<script>
-for(let i=0;i<20;i++){
-    let b=document.createElement("div");
-    b.className="bubble";
-    b.style.left=Math.random()*100+"%";
-    b.style.animationDuration=(5+Math.random()*10)+"s";
-    document.body.appendChild(b);
-}
-</script>
+<!-- 🫧 CLEAN BUBBLES -->
+<div class="bubble-container"></div>
+
+<div class="main">
 
 <header>
 <h1>⚡ Entertainment Hub</h1>
-<p>Neo Futuristic Streaming</p>
 </header>
 
 <nav>
@@ -167,85 +188,55 @@ for(let i=0;i<20;i++){
 
 <!-- HERO -->
 <div class="hero">
-<h1>Watch Anything Anytime</h1>
-<button onclick="alert('Start Watching')">Start Now</button>
+<div class="hero-content">
+<h1>Avengers</h1>
+<p>Epic cinematic universe experience</p>
+<button>Watch Now</button>
+</div>
 </div>
 
 <!-- MOVIES -->
 <div class="section">
-<h2>🔥 Trending Movies</h2>
+<h2>Trending</h2>
 <div class="row">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4">
-<button>Watch</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66">
-<button>Watch</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc">
-<button>Watch</button>
-</div>
+<div class="card"><img src="https://picsum.photos/200/120?1"></div>
+<div class="card"><img src="https://picsum.photos/200/120?2"></div>
+<div class="card"><img src="https://picsum.photos/200/120?3"></div>
+<div class="card"><img src="https://picsum.photos/200/120?4"></div>
 
 </div>
 </div>
 
-<!-- MUSIC -->
+<!-- MORE ROWS -->
 <div class="section">
-<h2>🎵 Music</h2>
+<h2>Popular</h2>
 <div class="row">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f">
-<button>Play</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2">
-<button>Play</button>
-</div>
-
-</div>
-</div>
-
-<!-- GAMES -->
-<div class="section">
-<h2>🎮 Games</h2>
-<div class="row">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
-<button>Play</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1">
-<button>Play</button>
-</div>
-
-</div>
-</div>
-
-<!-- EXTRA LONG CONTENT -->
-<div class="section">
-<h2>⭐ Recommended</h2>
-<div class="row">
-
-<div class="card"><img src="https://picsum.photos/200/120?1"><button>Watch</button></div>
-<div class="card"><img src="https://picsum.photos/200/120?2"><button>Watch</button></div>
-<div class="card"><img src="https://picsum.photos/200/120?3"><button>Watch</button></div>
-<div class="card"><img src="https://picsum.photos/200/120?4"><button>Watch</button></div>
-
+<div class="card"><img src="https://picsum.photos/200/120?5"></div>
+<div class="card"><img src="https://picsum.photos/200/120?6"></div>
+<div class="card"><img src="https://picsum.photos/200/120?7"></div>
 </div>
 </div>
 
 <footer>
 <p>© 2026 Entertainment Hub</p>
 </footer>
+
+</div>
+
+<!-- 🫧 BUBBLE SCRIPT (CONTROLLED) -->
+<script>
+const container=document.querySelector(".bubble-container");
+
+for(let i=0;i<25;i++){
+    let b=document.createElement("div");
+    b.className="bubble";
+    b.style.left=Math.random()*100+"%";
+    b.style.animationDuration=(8+Math.random()*10)+"s";
+    b.style.width=b.style.height=(20+Math.random()*40)+"px";
+    container.appendChild(b);
+}
+</script>
 
 </body>
 </html>
